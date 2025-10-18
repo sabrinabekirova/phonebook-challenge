@@ -4,22 +4,74 @@ import "./App.css";
 const FALLBACK_CONTACTS = [
     {
         id: 1,
-        name: "Ada Lovelace",
-        phone: "(555) 010-0101",
-        email: "ada@example.com",
+        name: "Elena Gilbert",
+        phone: "(555) 847-2931",
+        email: "elena@mysticfalls.com",
+        photo: src/assets/Elena.png
     },
     {
         id: 2,
-        name: "Alan Turing",
-        phone: "(555) 010-0102",
-        email: "alan@example.com",
+        name: "Damon Salvatore",
+        phone: "(555) 263-8147",
+        email: "damon@salvatore.com",
+        photo: src/assets/Damon.jpeg
     },
     {
         id: 3,
-        name: "Grace Hopper",
-        phone: "(555) 010-0103",
-        email: "grace@example.com",
+        name: "Stefan Salvatore",
+        phone: "(555) 491-6205",
+        email: "stefan@salvatore.com",
+        photo: src/assets/Stefan.jpeg
     },
+    {
+        id: 4,
+        name: "Caroline Forbes",
+        phone: "(555) 738-4926",
+        email: "caroline@mysticfalls.com",
+        photo: src/assets/Caroline.png
+    },
+    {
+        id: 5,
+        name: "Bonnie Bennett",
+        phone: "(555) 582-1639",
+        email: "bonnie@bennett.com",
+        photo: src/assets/Bonnie.png
+    },
+    {
+        id: 6,
+        name: "Klaus Mikaelson",
+        phone: "(555) 916-3847",
+        email: "klaus@mikaelson.com",
+        photo: src/assets/Klaus.png
+    },
+    {
+        id: 7,
+        name: "Elijah Mikaelson",
+        phone: "(555) 372-5918",
+        email: "elijah@mikaelson.com",
+        photo: src/assets/Elijah.png
+    },
+    {
+        id: 8,
+        name: "Rebekah Mikaelson",
+        phone: "(555) 654-2083",
+        email: "rebekah@mikaelson.com",
+        photo: src/assets/Rebekah.png
+    },
+    {
+        id: 9,
+        name: "Tyler Lockwood",
+        phone: "(555) 129-7463",
+        email: "tyler@lockwood.com",
+        photo: src/assets/Tyler.png
+    },
+    {
+        id: 10,
+        name: "Alaric Saltzman",
+        phone: "(555) 845-3192",
+        email: "alaric@mysticfalls.com",
+        photo: src/assets/Alaric.jpg
+    }
 ];
 
 const App = () => {
