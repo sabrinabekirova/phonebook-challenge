@@ -90,11 +90,14 @@ const App = () => {
     }
 
     return (
-        <main className="page" data-testid="page-root">
+        <>
+            <img src="/assets/blood.png" alt="" className="blood" />
+            <main className="page" data-testid="page-root">
             <header className="page__header">
                 <h1 className="page__title">Vampire Phone Book</h1>
                 <p className="page__subtitle">Find your favorite Mystic Falls resident!</p>
             </header>
+            <img src="/assets/divider.svg" alt="" className="header-divider" />
 
             <section className="search" aria-labelledby="search-heading">
                 <h2 id="search-heading">Search Contacts</h2>
@@ -118,8 +121,7 @@ const App = () => {
                 </p>
             </section>
 
-            <section className="contacts" aria-labelledby="contacts-heading">
-                <h2 id="contacts-heading">Contacts</h2>
+            <section className="contacts">
                     <ul className="contact-list">
                         <li className="contact-card">
                         <img src="/assets/Elena.png" alt="Elena Gilbert" />
@@ -134,7 +136,7 @@ const App = () => {
                         <p>damon@salvatore.com</p>
                     </li>
                     <li className="contact-card">
-                        <img src="/assets/Stefan.jpeg" alt="Stefan Salvatore" />
+                        <img src="/assets/Stefan.png" alt="Stefan Salvatore" />
                         <h3>Stefan Salvatore</h3>
                         <p>555-491-6205</p>
                         <p>stefan@salvatore.com</p>
@@ -183,6 +185,7 @@ const App = () => {
                     </li>
                 </ul>
             </section>
+            <img src="/assets/divider2.svg" alt="" className="section-divider" />
 
             <section className="form" aria-labelledby="form-heading">
                 <h2 id="form-heading">Add a Contact</h2>
@@ -192,6 +195,7 @@ const App = () => {
                         <input
                             id="name"
                             name="name"
+                            placeholder="Name"
                             value={form.name}
                             onChange={(e) => setForm({ ...form, name: e.target.value })}
                             required
@@ -204,7 +208,7 @@ const App = () => {
                             id="phone"
                             name="phone"
                             inputMode="tel"
-                            placeholder="000-000-0000"
+                            placeholder="Phone Number: 222-222-2222"
                             value={form.phone}
                             onChange={(e) =>
                                 setForm({ ...form, phone: e.target.value })
@@ -218,6 +222,7 @@ const App = () => {
                             id="email"
                             name="email"
                             type="email"
+                            placeholder="Email"
                             value={form.email}
                             onChange={(e) =>
                                 setForm({ ...form, email: e.target.value })
@@ -237,7 +242,8 @@ const App = () => {
                     &copy; 1-800-FINDAVAMP. The place to find your vampire needs.
                 </small>
             </footer>
-        </main>
+            </main>
+        </>
     );
 };
 
