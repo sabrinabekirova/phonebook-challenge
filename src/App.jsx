@@ -21,7 +21,7 @@ const FALLBACK_CONTACTS = [
         name: "Stefan Salvatore",
         phone: "555-491-6205",
         email: "stefan@salvatore.com",
-        photo: "/assets/Stefan.jpeg"
+        photo: "/assets/Stefan.png"
     },
     {
         id: 4,
@@ -120,9 +120,27 @@ const App = () => {
                     {error ? ` (error: ${error})` : ""}
                 </p>
             </section>
-
             <section className="contacts">
-                    <ul className="contact-list">
+                <ul className="contact-list">
+                    {FALLBACK_CONTACTS.map((contact) => {
+                        return (
+                            <li key={contact.id} className="contact-card">
+                                <img
+                                    src={contact.photo}
+                                    alt={contact.name}
+                                />
+                                <div>
+                                    <h3 className="contact-card__name">{contact.name}</h3>
+                                    <p className="contact-card__phone">{contact.phone}</p>
+                                    <p className="contact-card__email">{contact.email}</p>
+                                </div>
+                            </li>
+                        );
+                    })}
+                </ul>
+            </section>
+
+                    {/* <ul className="contact-list">
                         <li className="contact-card">
                         <img src="/assets/Elena.png" alt="Elena Gilbert" />
                         <h3>Elena Gilbert</h3>
@@ -184,7 +202,8 @@ const App = () => {
                         <p>alaric@mysticfalls.com</p>
                     </li>
                 </ul>
-            </section>
+            </section> */}
+
             <img src="/assets/divider2.svg" alt="" className="section-divider" />
 
             <section className="form" aria-labelledby="form-heading">
