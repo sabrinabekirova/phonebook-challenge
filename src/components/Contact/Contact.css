@@ -1,6 +1,27 @@
 .contact-card {
-    flex: 1;
-    width: 350px;
-    height: 350px;
-    border: 1px solid #000;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    padding: 1rem;
+    background: #1111119a;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.contact-card h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.1rem;
+}
+
+.contact-card p {
+    margin: 0.1rem 0;
+    color: #aaa;
 }
