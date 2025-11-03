@@ -129,6 +129,66 @@
     gap: 1.5rem;
 }
 
+.paging {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.arrow-left,
+.arrow-right {
+    border-radius: 8px;
+    border: 2px solid #5a0000;
+    width: 80px;
+    height: 50px;
+    background: #520000a2;
+    color: inherit;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+    padding: 0;
+}
+
+.arrow-left img,
+.arrow-right img {
+    width: 32px;
+    height: 20px;
+    display: block;
+}
+
+.arrow-left img {
+    transform: scaleX(-1);
+}
+
+.arrow-left:hover:not(:disabled),
+.arrow-right:hover:not(:disabled){
+    background-color: #8b000080;
+    transform: scale(1.1);
+}
+
+.arrow-left:disabled,
+.arrow-right:disabled{
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.page-content{
+    flex: 1;
+    max-width: 600px;
+}
+
+.page-info{
+    text-align: center;
+    color: #888;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
 .contacts__grid {
     list-style: none;
     padding: 0;

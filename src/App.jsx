@@ -79,6 +79,7 @@ const App = () => {
     const [contacts, setContacts] = useState(FALLBACK_CONTACTS);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {}, []);
 
@@ -89,6 +90,9 @@ const App = () => {
         e.preventDefault();
         // Add contact submission logic here
     }
+
+    // Get current contact to display
+    const currentContact = FALLBACK_CONTACTS[currentPage];
 
     return (
         <>
@@ -122,18 +126,39 @@ const App = () => {
                 </p>
             </section>
             <section className="contacts">
-                <ul className="contact-list">
-                    {FALLBACK_CONTACTS.map((contact) => (
-                        <li key={contact.id}>
-                            <Contact
-                                email={contact.email}
-                                name={contact.name}
-                                phone={contact.phone}
-                                photo={contact.photo}
-                            />
-                        </li>
-                    ))}
-                </ul>
+                <div className="paging">
+                    <button
+                        className="arrow-left"
+                        onClick={() => setCurrentPage(currentPage - 1)}
+                        disabled={currentPage === 0}
+                        aria-label="Previous contact"
+                    >
+                        <img src="/assets/arrow.png" alt="" />
+                    </button>
+                    <div className="page-content">
+                        <ul className="contact-list">
+                            <li key={currentContact.id}>
+                                <Contact
+                                    email={currentContact.email}
+                                    name={currentContact.name}
+                                    phone={currentContact.phone}
+                                    photo={currentContact.photo}
+                                />
+                            </li>
+                        </ul>
+                        <p className="page-info">
+                            {currentPage + 1} of {FALLBACK_CONTACTS.length}
+                        </p>
+                    </div>
+                    <button
+                        className="arrow-right"
+                        onClick={() => setCurrentPage(currentPage + 1)}
+                        disabled={currentPage === FALLBACK_CONTACTS.length - 1}
+                        aria-label="Next contact"
+                    >
+                        <img src="/assets/arrow.png" alt="" />
+                    </button>
+                </div>
             </section>
 
                     {/* <ul className="contact-list">
