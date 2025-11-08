@@ -258,6 +258,20 @@ select::placeholder {
     gap: 0.5rem;
 }
 
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.80rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.no-results {
+    text-align: center;
+    color: #888;
+    padding: 2rem;
+    font-style: italic;
+}
+
 .page__footer {
     margin-top: 3rem;
     color: #777;

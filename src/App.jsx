@@ -78,21 +78,83 @@ const FALLBACK_CONTACTS = [
 const App = () => {
     const [contacts, setContacts] = useState(FALLBACK_CONTACTS);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
 
-    useEffect(() => {}, []);
+    useEffect(function(){ //fetches contacts from json file
+        setLoading(true);
 
-    const [query, setQuery] = useState("");
+        fetch("/data/contacts.json")
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(data){
+                setContacts(data);
+            })
+            .catch(function() {
+                setContacts(FALLBACK_CONTACTS);
+            });
+    }, []);
 
-    const [form, setForm] = useState({ name: "", phone: "", email: "" });
-    function handleSubmit(e) {
-        e.preventDefault();
-        // Add contact submission logic here
+
+  const [query, setQuery] = useState("");
+
+  let filteredContacts = contacts;
+  if (query.trim() !== "") {
+    const q = query.toLowerCase();
+    // no case sensiticity
+    filteredContacts = contacts.filter(function(contact) {
+      const nameLower = contact.name.toLowerCase();
+
+      const phoneLower = String(contact.phone).toLowerCase();
+      const nameMatches = nameLower.includes(q);
+      const phoneMatches = phoneLower.includes(q);
+
+      //checks if match appears for number orname, wont work if number has dashes
+      if (nameMatches || phoneMatches) {
+        return true;
+      }
+      return false;
+    });
+  }
+
+  const [form, setForm] = useState({ name: "", phone: "", email: "" });
+  const [validationErrors, setValidationErrors] = useState({});
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const errors = {}; // reset errors
+
+    // validate form fields, trim to remove whitespace
+    if (!form.name.trim()) errors.name = "Enter a name!"; 
+    if (!form.phone.trim()) errors.phone = "Enter a phone number!";
+    if (form.email && !form.email.includes("@")) errors.email = "Email needs @!";
+
+    //checks for duplicate phone numbers
+    if (contacts.some(contact => contact.phone === form.phone.trim())) {
+      errors.phone = "Phone number already exists!";
     }
+    //if errors, says why and prevents submission
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
+    //creates new contacts object
+    const newContact = {
+      id: Date.now(), //unique ID using date to add contact (adding i tried adding 1 to last ID but got duplicate IDs)
+      name: form.name.trim(),
+      phone: form.phone.trim(),
+      email: form.email.trim(),
+    };
 
-    // Get current contact to display
-    const currentContact = FALLBACK_CONTACTS[currentPage];
+    setContacts([newContact, ...contacts]); //adds new contact to beginning of list
+    setForm({ name: "", phone: "", email: "" }); //reset form fields
+    setValidationErrors({}); //reset validation errors
+
+    if (typeof setCurrentPage === "function") setCurrentPage(0);
+  }
+
+  const currentContact = filteredContacts[currentPage];
 
     return (
         <>
@@ -113,47 +175,58 @@ const App = () => {
                         type="search"
                         placeholder="Search by name or phone"
                         value={query}
-                        onChange={(e) => setQuery(e.target.value)}
+                        onChange={function(e) { setQuery(e.target.value); }}
                         data-testid="search-input"
                     />
                 </div>
 
                 <p className="search__results" data-testid="results-count">
-                    Showing {contacts.length}{" "}
-                    {contacts.length === 1 ? "result" : "results"}
-                    {loading ? " (loading...)" : ""}
-                    {error ? ` (error: ${error})` : ""}
+                    Showing {filteredContacts.length}{" "}
+                    {filteredContacts.length === 1
+                        ? "result"
+                        : "results"}
+                    {loading
+                        ? " (loading...)"
+                        : ""}
                 </p>
             </section>
             <section className="contacts">
                 <div className="paging">
                     <button
                         className="arrow-left"
-                        onClick={() => setCurrentPage(currentPage - 1)}
+                        onClick={function() { setCurrentPage(currentPage - 1); }}
                         disabled={currentPage === 0}
                         aria-label="Previous contact"
                     >
                         <img src="/assets/arrow.png" alt="" />
                     </button>
-                    <div className="page-content">
-                        <ul className="contact-list">
-                            <li key={currentContact.id}>
-                                <Contact
-                                    email={currentContact.email}
-                                    name={currentContact.name}
-                                    phone={currentContact.phone}
-                                    photo={currentContact.photo}
-                                />
-                            </li>
-                        </ul>
-                        <p className="page-info">
-                            {currentPage + 1} of {FALLBACK_CONTACTS.length}
-                        </p>
+                    <div className="page-content"> {/*displays current contact information*/}
+                        {filteredContacts.length > 0
+                            ? (
+                                <>
+                                    <ul className="contact-list">
+                                        <li key={currentContact.id}>
+                                            <Contact
+                                                email={currentContact.email}
+                                                name={currentContact.name}
+                                                phone={currentContact.phone}
+                                                photo={currentContact.photo}
+                                            />
+                                        </li>
+                                    </ul>
+                                    <p className="page-info">
+                                        {currentPage + 1} of {filteredContacts.length}
+                                    </p>
+                                </>
+                            )
+                            :(
+                                <p className="no-results">No contacts found</p>
+                            )}
                     </div>
                     <button
                         className="arrow-right"
-                        onClick={() => setCurrentPage(currentPage + 1)}
-                        disabled={currentPage === FALLBACK_CONTACTS.length - 1}
+                        onClick={function() { setCurrentPage(currentPage + 1); }} //go to next contact
+                        disabled={currentPage === filteredContacts.length - 1} //disable if on last contact
                         aria-label="Next contact"
                     >
                         <img src="/assets/arrow.png" alt="" />
@@ -241,6 +314,9 @@ const App = () => {
                             required
                             minLength={2}
                         />
+                        {validationErrors.name && (
+                            <span className="error-message">{validationErrors.name}</span> //displays error message if name validation fails
+                        )}
                     </div>
                     <div className="field">
                         <label htmlFor="phone">Phone</label>
@@ -255,6 +331,9 @@ const App = () => {
                             }
                             required
                         />
+                        {validationErrors.phone && (
+                            <span className="error-message">{validationErrors.phone}</span> //displays error message if phone validation fails
+                        )}
                     </div>
                     <div className="field">
                         <label htmlFor="email">Email</label>
@@ -268,6 +347,9 @@ const App = () => {
                                 setForm({ ...form, email: e.target.value })
                             }
                         />
+                        {validationErrors.email && (
+                            <span className="error-message">{validationErrors.email}</span> //displays error message if email validation fails
+                        )}
                     </div>
                     <div className="form__actions">
                         <button className="btn" type="submit" data-testid="btn-add">

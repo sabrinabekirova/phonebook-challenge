@@ -1,32 +1,72 @@
 [
     {
-        "id": 101,
-        "name": "Ada Lovelace",
-        "phone": "(555) 010-0101",
-        "email": "ada@example.com"
+        "id": 1,
+        "name": "Elena Gilbert",
+        "phone": "555-847-2931",
+        "email": "elena@mysticfalls.com",
+        "photo": "/assets/Elena.png"
     },
     {
-        "id": 102,
-        "name": "Alan Turing",
-        "phone": "(555) 010-0102",
-        "email": "alan@example.com"
+        "id": 2,
+        "name": "Damon Salvatore",
+        "phone": "555-263-8147",
+        "email": "damon@salvatore.com",
+        "photo": "/assets/Damon.jpeg"
     },
     {
-        "id": 103,
-        "name": "Grace Hopper",
-        "phone": "(555) 010-0103",
-        "email": "grace@example.com"
+        "id": 3,
+        "name": "Stefan Salvatore",
+        "phone": "555-491-6205",
+        "email": "stefan@salvatore.com",
+        "photo": "/assets/Stefan.png"
     },
     {
-        "id": 104,
-        "name": "Katherine Johnson",
-        "phone": "(555) 010-0104",
-        "email": "katherine@example.com"
+        "id": 4,
+        "name": "Caroline Forbes",
+        "phone": "555-738-4926",
+        "email": "caroline@mysticfalls.com",
+        "photo": "/assets/Caroline.png"
     },
     {
-        "id": 105,
-        "name": "Donald Knuth",
-        "phone": "(555) 010-0105",
-        "email": "donald@example.com"
+        "id": 5,
+        "name": "Bonnie Bennett",
+        "phone": "555-582-1639",
+        "email": "bonnie@bennett.com",
+        "photo": "/assets/Bonnie.png"
+    },
+    {
+        "id": 6,
+        "name": "Klaus Mikaelson",
+        "phone": "555-916-3847",
+        "email": "klaus@mikaelson.com",
+        "photo": "/assets/Klaus.png"
+    },
+    {
+        "id": 7,
+        "name": "Elijah Mikaelson",
+        "phone": "555-372-5918",
+        "email": "elijah@mikaelson.com",
+        "photo": "/assets/Elijah.png"
+    },
+    {
+        "id": 8,
+        "name": "Rebekah Mikaelson",
+        "phone": "555-654-2083",
+        "email": "rebekah@mikaelson.com",
+        "photo": "/assets/Rebekah.png"
+    },
+    {
+        "id": 9,
+        "name": "Tyler Lockwood",
+        "phone": "555-129-7463",
+        "email": "tyler@lockwood.com",
+        "photo": "/assets/Tyler.png"
+    },
+    {
+        "id": 10,
+        "name": "Alaric Saltzman",
+        "phone": "555-845-3192",
+        "email": "alaric@mysticfalls.com",
+        "photo": "/assets/Alaric.png"
     }
 ]
